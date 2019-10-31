@@ -1,0 +1,30 @@
+{
+    "name": "nest-sitemap",
+    "version": "0.0.1",
+    "description": "Packet for generating sitemap of your resource",
+    "main": "dist/index.js",
+    "repository": "https://github.com/vlzh/nest-sitemap",
+    "author": "vlzh",
+    "license": "MIT",
+    "scripts": {
+        "build": "tsc",
+        "start": "tsc --watch"
+    },
+    "peerDependencies": {
+        "typeorm": "^0.2.20"
+    },
+    "devDependencies": {
+        "@nestjs/common": "^6.8.5",
+        "@typescript-eslint/eslint-plugin": "^2.6.0",
+        "@typescript-eslint/parser": "^2.6.0",
+        "eslint": "^6.6.0",
+        "eslint-config-prettier": "^6.5.0",
+        "eslint-plugin-prettier": "^3.1.1",
+        "prettier": "^1.18.2",
+        "typeorm": "^0.2.20"
+    },
+    "dependencies": {
+        "sitemap": "^5.0.1",
+        "typescript": "^3.6.4"
+    }
+}
