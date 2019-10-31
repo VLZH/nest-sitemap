@@ -8,7 +8,7 @@ import { SitemapItem } from "./item";
 import { registry } from "./registry";
 import { getRepository } from "typeorm";
 
-type UrlExtructor = (item: any) => string;
+type UrlExtructor = (item: any) => string | Promise<string>;
 
 export interface TypeormOptions {
     getUrl: UrlExtructor;
@@ -32,16 +32,24 @@ export class TypeormSource implements SitemapSource {
         // get all items
         const findResults = await repo.find();
         // extract urls
-        return findResults.map(item => {
-            return new SitemapItem({
-                url: this.getUrlFunc(item),
-                changefreq: this.getChangefreq
-                    ? this.getChangefreq(item)
-                    : undefined,
-                priority: this.getPriority ? this.getPriority(item) : undefined,
-                lastmod: this.getLastMod ? this.getLastMod(item) : undefined
-            });
-        });
+        return Promise.all(
+            findResults.map(async item => {
+                let url = this.getUrlFunc(item);
+                if (url instanceof Promise) {
+                    url = await url;
+                }
+                return new SitemapItem({
+                    url,
+                    changefreq: this.getChangefreq
+                        ? this.getChangefreq(item)
+                        : undefined,
+                    priority: this.getPriority
+                        ? this.getPriority(item)
+                        : undefined,
+                    lastmod: this.getLastMod ? this.getLastMod(item) : undefined
+                });
+            })
+        );
     }
 }
 

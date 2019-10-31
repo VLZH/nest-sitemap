@@ -1,6 +1,6 @@
 {
     "name": "nest-sitemap",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "description": "Packet for generating sitemap of your resource",
     "main": "dist/index.js",
     "repository": "https://github.com/vlzh/nest-sitemap",
