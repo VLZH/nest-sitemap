@@ -1,4 +1,5 @@
 import { DEFAUL_CHANGEFREQ, DEFAUL_PRIORITY } from "./constances";
+
 export class SitemapItem {
     public url!: string;
     public changefreq?: string;
