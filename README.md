@@ -1,6 +1,6 @@
 # How to use
 
-Add module:
+Register module:
 ```typescript
 import { SitemapModule } from 'nest-sitemap';
 
@@ -37,6 +37,20 @@ import { TypeormSitemapResource } from 'nest-sitemap';
 export class ArticleEntity extends BaseSeoEntity {
     @Column()
     public title: string;
+}
+```
+
+Access to sitemap xml from some controller:
+```typescript
+@Controller()
+export class MainController {
+    public constructor(private readonly sitemap_service: SitemapService) {}
+    
+    @Header('Content-Type', 'application/xml')
+    @Get('sitemap')
+    public getSitemap() {
+        return this.sitemap_service.getSitemapXml();
+    }
 }
 ```
 
